@@ -1,0 +1,33 @@
+<?php
+	$servername = "localhost";
+	$db_username="root";
+	$db_password="";
+	$db_name="lab";
+	
+	function execute($query){ //insert, update ,delete,
+		global $servername, $db_username, $db_password,$db_name;
+		$conn = mysqli_connect($servername,$db_username,$db_password,$db_name);
+		$result = mysqli_query($conn,$query);
+	}
+	function getResult($query){  //select query
+		global $servername, $db_username, $db_password,$db_name;
+		$conn = mysqli_connect($servername,$db_username,$db_password,$db_name);
+		$result = mysqli_query($conn,$query);
+		return $result;
+	}
+	function getArray($query){
+		global $servername, $db_username, $db_password,$db_name;
+		$conn = mysqli_connect($servername,$db_username,$db_password,$db_name);
+		$result = mysqli_query($conn,$query);
+		
+		if(mysqli_num_rows($result) < 2){
+			return mysqli_fetch_assoc($result);
+		}
+		$data = array();
+		while($row = mysqli_fetch_assoc($result)){
+			$data[] = $row;
+		}
+		return $data;
+	}
+	
+?>
